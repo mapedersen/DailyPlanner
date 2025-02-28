@@ -19,3 +19,4 @@ obj/
 *.suo
 *.cache
 *.vs/
+Migrations/
