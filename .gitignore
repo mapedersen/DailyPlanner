@@ -1,0 +1,20 @@
+# Ignore dependencies
+node_modules/
+bun.lockb
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Ignore build outputs
+dist/
+build/
+.vscode/
+.DS_Store
+
+# Ignore .NET build files
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.vs/

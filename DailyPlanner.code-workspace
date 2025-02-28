@@ -1,0 +1,59 @@
+{
+	"folders": [
+		{
+			"path": "backend"
+		},
+		{
+			"path": "frontend"
+		},
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"editor.formatOnSave": true,
+		"files.exclude": {
+			"**/node_modules": true,
+			"**/bin": true,
+			"**/obj": true
+		}
+	},
+	"tasks": {
+		"version": "2.0.0",
+		"tasks": [
+			{
+				"label": "Start Backend",
+				"type": "shell",
+				"command": "dotnet run",
+				"options": {
+					"cwd": "${workspaceFolder:backend}/API" 
+				},
+				"group": {
+					"kind": "build",
+					"isDefault": true
+				}
+			},
+			{
+				"label": "Start Frontend",
+				"type": "shell",
+				"command": "bun run dev",
+				"options": {
+					"cwd": "${workspaceFolder:frontend}"
+				},
+				"group": {
+					"kind": "build",
+					"isDefault": true
+				}
+			},
+			{
+			"label": "Start Full Stack",
+			"dependsOn": ["Start Backend", "Start Frontend"],
+			"group": {
+				"kind": "build",
+				"isDefault": false
+			}
+		}
+
+		]
+	}
+}
