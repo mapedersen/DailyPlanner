@@ -1,3 +1,5 @@
+using DailyPlanner.API.Repositories;
+using DailyPlanner.API.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,7 +9,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Register Repositories & Services
-builder.Services.AddScoped<HabitRepository>();
+builder.Services.AddScoped<IHabitRepository, HabitRepository>();
 builder.Services.AddScoped<HabitService>();
 
 
