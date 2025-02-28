@@ -12,7 +12,6 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
-    Console.WriteLine("OpenAPI is enabled");
 }
 
 app.UseHttpsRedirection();
