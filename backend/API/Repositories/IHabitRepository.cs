@@ -5,9 +5,10 @@ namespace DailyPlanner.API.Repositories
 {
     public interface IHabitRepository
     {
-        Task<IEnumerable<Habit>> GetAllHabitsAsync();
-        Task<Habit?> GetHabitByIdAsync(int id);
-        Task AddHabitAsync(Habit habit);
-        Task DeleteHabitAsync(int id);
+        Task<IEnumerable<Habit>> GetAllAsync();
+        Task<Habit?> GetByIdAsync(int id);
+        Task AddAsync(Habit habit);
+        Task UpdateAsync(Habit habit);
+        Task DeleteAsync(int id);
     }
 }

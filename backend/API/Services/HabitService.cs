@@ -11,29 +11,33 @@ namespace DailyPlanner.API.Services
             _habitRepository = habitRepository;
         }
 
-        public async Task<IEnumerable<Habit>> GetHabitsAsync()
+        public async Task<IEnumerable<Habit>> GetAllAsync()
         {
-            return await _habitRepository.GetAllHabitsAsync();
+            return await _habitRepository.GetAllAsync();
         }
 
-        public async Task<Habit?> GetHabitByIdAsync(int id)
+        public async Task<Habit?> GetByIdAsync(int id)
         {
-            return await _habitRepository.GetHabitByIdAsync(id);
+            return await _habitRepository.GetByIdAsync(id);
         }
 
-        public async Task AddHabitAsync(Habit habit)
+        public async Task AddAsync(Habit habit)
         {
-            // Example business rule: Prevent adding duplicate habits
-            var habits = await _habitRepository.GetAllHabitsAsync();
-            if (!habits.Any(h => h.Name == habit.Name))
-            {
-                await _habitRepository.AddHabitAsync(habit);
-            }
+            if (string.IsNullOrWhiteSpace(habit.Name))
+                throw new ArgumentException("Habit name cannot be empty");
+
+            await _habitRepository.AddAsync(habit);
         }
 
-        public async Task DeleteHabitAsync(int id)
+        public async Task UpdateAsync(Habit habit)
         {
-            await _habitRepository.DeleteHabitAsync(id);
+            await _habitRepository.UpdateAsync(habit);
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            await _habitRepository.DeleteAsync(id);
         }
     }
+
 }
