@@ -10,6 +10,7 @@ dist/
 build/
 .vscode/
 .DS_Store
+.env
 
 # Ignore .NET build files
 bin/
@@ -18,3 +19,4 @@ obj/
 *.suo
 *.cache
 *.vs/
+Migrations/
