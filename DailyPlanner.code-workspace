@@ -24,7 +24,7 @@
 			{
 				"label": "Start Backend",
 				"type": "shell",
-				"command": "dotnet run --launch-profile https",
+				"command": "dotnet watch run --launch-profile https",
 				"options": {
 					"cwd": "${workspaceFolder:backend}/API" 
 				},
