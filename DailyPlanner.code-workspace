@@ -24,19 +24,34 @@
 	"tasks": {
 		"version": "2.0.0",
 		"tasks": [
-			{
-				"label": "Start Backend",
+				{
+				"label": "Start Backend (Docker)",
 				"type": "shell",
-				"command": "dotnet watch run --launch-profile https",
-				"options": {
-					"cwd": "${workspaceFolder:backend}/API" 
-				},
+				"command": "docker-compose up -d api db",
 				"group": {
 					"kind": "build",
 					"isDefault": true
 				}
-			},
-			{
+				},
+				{
+				"label": "Down Backend (Docker)",
+				"type": "shell",
+				"command": "docker-compose down",
+				"group": {
+					"kind": "build",
+					"isDefault": false
+				}
+				},
+				{
+				"label": "Stop Backend (Docker)",
+				"type": "shell",
+				"command": "docker-compose stop",
+				"group": {
+					"kind": "build",
+					"isDefault": false
+				}
+				},
+				{
 				"label": "Start Frontend",
 				"type": "shell",
 				"command": "bun run dev",
@@ -50,7 +65,7 @@
 			},
 			{
 			"label": "Start Full Stack",
-			"dependsOn": ["Start Backend", "Start Frontend"],
+			"dependsOn": ["Up Backend (Docker)", "Start Frontend"],
 			"group": {
 				"kind": "build",
 				"isDefault": false
