@@ -11,12 +11,18 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:5267
-      - DOTNET_USER_SECRETS=/root/.microsoft/usersecrets
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
+      - DOTNET_WATCH_SUPPRESS_EMOJIS=1
+      - DOTNET_WATCH_RESTART_ON_RUDE_EDIT=1
       - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Database=dailyplanner;Username=planner_user;Password=securepassword
     restart: always
     depends_on:
       db:
         condition: service_healthy
+    volumes:
+      - .:/app
+      - /app/API/bin
+      - /app/API/obj
 
   db:
     image: postgres:latest
