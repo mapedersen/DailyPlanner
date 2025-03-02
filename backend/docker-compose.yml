@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: API/Dockerfile
+    container_name: dailyplanner-api
+    ports:
+      - "5267:5267"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5267
+      - DOTNET_USER_SECRETS=/root/.microsoft/usersecrets
+      - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Database=dailyplanner;Username=planner_user;Password=securepassword
+    restart: always
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:latest
+    container_name: dailyplanner-db
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: planner_user
+      POSTGRES_PASSWORD: securepassword
+      POSTGRES_DB: dailyplanner
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U planner_user -d dailyplanner" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata:
