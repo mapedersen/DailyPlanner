@@ -43,7 +43,11 @@ if (app.Environment.IsDevelopment())
     app.UseCors("LocalhostPolicy");
 }
 
-app.UseHttpsRedirection();
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
+
 
 app.UseAuthorization();
 
